@@ -1,8 +1,7 @@
 import uuid
 import os
 
-from ClientApplication import SystemFunctions
-from ClientApplication.MessageCipherHandler import MessageCipherHandler
+from MessageCipherHandler import MessageCipherHandler
 
 
 class MessageHandler:

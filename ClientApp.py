@@ -2,10 +2,11 @@ import os
 import json
 import socket
 import time
-from getmac import get_mac_address
 import SystemFunctions
-from MessageHandler import MessageHandler
 import servicemanager
+from dotenv import load_dotenv
+from getmac import get_mac_address
+from MessageHandler import MessageHandler
 
 
 class Client:
@@ -16,12 +17,11 @@ class Client:
 
     def __init__(self):
         self.ensure_dependencies()
-        self.PORT = 50000
 
-        #FIXME this static address only works after installation
-        # change this back before final product
-        #self.SERVER = self.get_server_ip()
-        self.SERVER = socket.gethostbyname(socket.gethostname())
+        load_dotenv()
+
+        self.PORT = int(os.getenv("SOCKET_PORT", 50000))
+        self.SERVER = os.getenv("SERVER_ADDRESS", "127.0.0.1")
         self.ADDR = (self.SERVER, self.PORT)
         self.message_controller = MessageHandler(object)
         self.connected = False
